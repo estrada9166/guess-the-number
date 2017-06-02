@@ -8,12 +8,12 @@ var answer = Math.floor((Math.random() * maxNumberRandom) + 1);
 // Create a function and pass the min and max number used on the excercice
 // so you can get the average number of both
 var findTheNumber = function(minNumber, maxNumber) {
-    var averageNumber = Math.floor((minNumber + maxNumber) / 2);
+    var averageNumber = Math.floor((minNumber + maxNumber + 1) / 2);
     // finde the average number of both so you can see if it is higher or lower
     if(averageNumber != answer) {
         // if it is higher call again the function but pass as min val the average numer
         // so you can reduce the number list to a half
-        if(answer > averageNumber) {
+        if(answer >= averageNumber) {
             return findTheNumber(averageNumber, maxNumber);
         } else {
             return findTheNumber(minNumber, averageNumber);
@@ -23,20 +23,23 @@ var findTheNumber = function(minNumber, maxNumber) {
     }
 }
 
+var count = 0;
 // Use the same function but pass the result that you want to get
 // because you are using random numbers, dificult to pass a test with
 // a number you have decided.
 var testFindTheNumber = function(testAnswer, minNumber, maxNumber) {
-    var averageNumber = Math.floor((minNumber + maxNumber) / 2);
+    count ++;
+    console.log(count)
+    var averageNumber = Math.floor((minNumber + maxNumber + 1) / 2);
     if(averageNumber != testAnswer) {
-        if(testAnswer > averageNumber) {
+        if(testAnswer >= averageNumber) {
             return testFindTheNumber(testAnswer, averageNumber, maxNumber);
         } else {
             return testFindTheNumber(testAnswer, minNumber, averageNumber);
         }
     } else {
         return averageNumber;
-    }
+    }   
 }
 
 
@@ -55,7 +58,7 @@ console.log(finalResult);
 
 // Chek if the random number is equal to the one returned by findTheNumber
 assertEqualNumbers(answer, finalResult);
-assertEqualNumbers(100, testFindTheNumber(100, minNumberRandom, maxNumberRandom));
+assertEqualNumbers(300, testFindTheNumber(300, minNumberRandom, maxNumberRandom));
 assertEqualNumbers(196, testFindTheNumber(196, minNumberRandom, maxNumberRandom));
 assertEqualNumbers(250, testFindTheNumber(250, minNumberRandom, maxNumberRandom));
 assertEqualNumbers(1, testFindTheNumber(1, minNumberRandom, maxNumberRandom));
